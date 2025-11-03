@@ -3,7 +3,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -25,13 +24,19 @@ export default function NavBar() {
     return pathname.startsWith(href);
   };
 
-  return (
-    <header className="absolute top-0 left-0 right-0 bg-black/20 text-white w-full z-30 backdrop-blur-md shadow-lg border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Empty left space for balance */}
-          <div className="flex-1"></div>
+  // Check if current page has hero background
+  const hasHeroBackground = pathname === "/" || pathname === "/about";
 
+  return (
+    <header
+      className={`top-0 left-0 right-0 text-white w-full z-30 shadow-lg ${
+        hasHeroBackground
+          ? "absolute bg-black/20 backdrop-blur-md border-b border-white/10"
+          : "relative bg-gray-900 border-b border-gray-700"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center items-center h-16">
           {/* Desktop Nav - Centered */}
           <nav className="hidden md:flex space-x-8 justify-center">
             {navLinks.map((link) => (
@@ -49,24 +54,9 @@ export default function NavBar() {
             ))}
           </nav>
 
-          {/* Logo - Right side */}
-          <div className="flex-1 flex justify-end">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-8 w-32">
-                <Image
-                  src="/image/logo.png"
-                  alt="Bhagwati Packing Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </Link>
-          </div>
-
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-white hover:text-yellow-500 transition-colors duration-300 ml-4"
+            className="md:hidden text-white hover:text-yellow-500 transition-colors duration-300"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -76,7 +66,13 @@ export default function NavBar() {
 
       {/* Mobile Nav */}
       {menuOpen && (
-        <div className="md:hidden bg-black/30 backdrop-blur-md border-t border-white/10">
+        <div
+          className={`md:hidden border-t ${
+            hasHeroBackground
+              ? "bg-black/30 backdrop-blur-md border-white/10"
+              : "bg-gray-800 border-gray-700"
+          }`}
+        >
           <div className="space-y-1 px-4 pb-4 pt-2">
             {navLinks.map((link) => (
               <Link
