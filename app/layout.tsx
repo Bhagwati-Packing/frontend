@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/NavBar"; 
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,8 +32,11 @@ export default function RootLayout({
         {/* NavBar included here so it's visible on all pages */}
         <NavBar />
 
-        {/* Main content, no padding since Hero is full screen */}
+        {/* Main content */}
         <main>{children}</main>
+
+        {/* Footer included here so it's visible on all pages */}
+        <Footer />
       </body>
     </html>
   );
