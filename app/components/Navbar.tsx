@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export default function NavBar() {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 

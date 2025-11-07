@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 const geistSans = Geist({
@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Bhagwati Packing",
   description: "Total Packaging Solutions since 2000",
+  icons: {
+    icon: "/image/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -35,7 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* NavBar included here so it's visible on all pages */}
-        <NavBar />
+        <Navbar />
 
         {/* Main content */}
         <main>{children}</main>
